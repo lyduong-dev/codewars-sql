@@ -1,0 +1,10 @@
+select 
+  people.id, 
+  people.name, 
+  count(sales.sale) as sale_count, 
+  rank() over (order by count(sales.sale)) as sale_rank
+from people 
+inner join sales 
+on people.id = sales.people_id 
+group by people.id 
+order by sale_count;
